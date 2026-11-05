@@ -4,10 +4,11 @@ import { MusicButton } from "./MusicButton";
 type HeroTopBarProps = {
   datePill: string;
   musicLabel: string;
+  musicSrc: string;
 };
 
 /** Плашка с датой слева и кнопка музыки справа. */
-export function HeroTopBar({ datePill, musicLabel }: HeroTopBarProps) {
+export function HeroTopBar({ datePill, musicLabel, musicSrc }: HeroTopBarProps) {
   return (
     <div className="flex items-center justify-between gap-3">
       <p className="flex min-w-0 items-center gap-1.5 rounded-full bg-blush-100 px-3 py-1 drop-shadow-[0_1px_1px_rgb(0_0_0/0.05)]">
@@ -16,7 +17,7 @@ export function HeroTopBar({ datePill, musicLabel }: HeroTopBarProps) {
           {datePill}
         </span>
       </p>
-      <MusicButton label={musicLabel} />
+      <MusicButton label={musicLabel} src={musicSrc} />
     </div>
   );
 }

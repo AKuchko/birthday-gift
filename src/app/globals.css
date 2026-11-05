@@ -49,7 +49,6 @@
   --shadow-frame: 0 16px 38px -6px rgb(var(--shadow-rgb) / 0.12);
   --shadow-header: 0 4px 20px -2px rgb(var(--shadow-rgb) / 0.06);
 
-  --animate-fade-up: fade-up 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
   --animate-paw-bounce: paw-bounce 1.8s ease-in-out infinite;
   --animate-float: float 7s ease-in-out infinite;
   --animate-pug-tilt: pug-tilt 4s ease-in-out infinite;
@@ -118,17 +117,6 @@
     }
   }
 
-  @keyframes fade-up {
-    from {
-      opacity: 0;
-      transform: translateY(16px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
   @keyframes paw-bounce {
     0%,
     100% {
@@ -180,16 +168,33 @@ body {
   color: var(--color-ink-muted);
 }
 
+/* ------------------------------------------------------------------
+   Reveal — появление элементов при прокрутке (компонент Reveal).
+   Все параметры здесь: меняются в одном месте для всего сайта.
+   ------------------------------------------------------------------ */
+:root {
+  --reveal-distance: 30px; /* сдвиг снизу вверх */
+  --reveal-duration: 700ms;
+  --reveal-ease: cubic-bezier(0.22, 1, 0.36, 1); /* мягкий ease-out */
+  --reveal-stagger: 100ms; /* шаг задержки между элементами группы */
+}
+
+.reveal {
+  opacity: 0;
+  transform: translate3d(0, var(--reveal-distance), 0);
+  transition-property: opacity, transform;
+  transition-duration: var(--reveal-duration);
+  transition-timing-function: var(--reveal-ease);
+  transition-delay: calc(var(--reveal-order, 0) * var(--reveal-stagger));
+}
+
+.reveal[data-visible="true"] {
+  opacity: 1;
+  transform: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
-  }
-
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
   }
 }

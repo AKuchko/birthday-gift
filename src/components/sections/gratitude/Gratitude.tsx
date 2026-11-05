@@ -9,11 +9,9 @@ import { QuoteCard } from "./QuoteCard";
 /** Секция 2 — благодарность. */
 export function Gratitude() {
   return (
-    <section id="gratitude" className="bg-surface px-5 pt-12 pb-4 md:px-8 md:pt-10">
+    <section id="gratitude" tabIndex={-1} className="outline-none bg-surface px-5 pt-12 pb-4 md:px-8 md:pt-10">
       <div className="mx-auto flex max-w-[896px] flex-col">
-        <Reveal>
-          <SectionHeading overline={gratitude.overline} title={gratitude.title} />
-        </Reveal>
+        <SectionHeading overline={gratitude.overline} title={gratitude.title} />
 
         <Reveal className="mt-6">
           <QuoteCard quote={gratitude.quote} />
@@ -25,14 +23,14 @@ export function Gratitude() {
           <ul className="flex flex-col gap-4 md:col-span-7">
             {gratitude.items.map((item, i) => (
               <li key={item.title}>
-                <Reveal delay={i * 80}>
+                <Reveal order={i}>
                   <GratitudeCard {...item} />
                 </Reveal>
               </li>
             ))}
           </ul>
 
-          <Reveal className="mx-auto w-full max-w-[384px] px-2 md:col-span-5 md:px-0" delay={200}>
+          <Reveal order={1} className="mx-auto w-full max-w-[384px] px-2 md:col-span-5 md:px-0">
             <Polaroid
               src={gratitude.polaroid.src}
               alt={gratitude.polaroid.alt}
@@ -42,7 +40,9 @@ export function Gratitude() {
           </Reveal>
         </div>
 
-        <PawTrail className="py-10 md:py-[40px]" />
+        <Reveal>
+          <PawTrail className="py-10 md:py-[40px]" />
+        </Reveal>
       </div>
     </section>
   );

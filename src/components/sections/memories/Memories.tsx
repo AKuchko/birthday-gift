@@ -6,15 +6,13 @@ import { MemoriesGallery } from "./MemoriesGallery";
 /** Секция 3 — памятные моменты. */
 export function Memories() {
   return (
-    <section id="memories" className="bg-bg px-5 py-12 md:px-8 md:py-10">
+    <section id="memories" tabIndex={-1} className="outline-none bg-bg px-5 py-12 md:px-8 md:py-10">
       <div className="mx-auto flex max-w-[896px] flex-col gap-6">
-        <Reveal>
-          <SectionHeading
-            overline={memories.overline}
-            title={memories.title}
-            description={memories.description}
-          />
-        </Reveal>
+        <SectionHeading
+          overline={memories.overline}
+          title={memories.title}
+          description={memories.description}
+        />
 
         <MemoriesGallery items={memories.items} />
 

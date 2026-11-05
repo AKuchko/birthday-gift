@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Manrope, Playfair_Display } from "next/font/google";
+import { SmoothAnchorScroll } from "@/components/layout/SmoothAnchorScroll";
 import "./globals.css";
 
 const manrope = Manrope({
@@ -32,7 +33,14 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="ru"
       className={`${manrope.variable} ${playfair.variable} h-full antialiased`}
     >
-      <body className="flex min-h-full flex-col font-sans">{children}</body>
+      <body className="flex min-h-full flex-col font-sans">
+        {/* Без JavaScript анимации появления не запустятся — показываем всё сразу */}
+        <noscript>
+          <style>{`.reveal{opacity:1!important;transform:none!important}`}</style>
+        </noscript>
+        <SmoothAnchorScroll />
+        {children}
+      </body>
     </html>
   );
 }

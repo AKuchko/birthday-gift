@@ -18,7 +18,8 @@ export function MemoriesGallery({ items }: { items: Memory[] }) {
       <ul className="grid grid-cols-1 gap-8 pt-4 md:grid-cols-2 md:gap-6">
         {items.map((item, i) => (
           <li key={item.title} className="mx-auto w-full max-w-[340px]">
-            <Reveal delay={(i % 2) * 120}>
+            {/* Правая колонка появляется чуть позже левой */}
+            <Reveal order={i % 2}>
               <MemoryCard
                 {...item}
                 index={i}
