@@ -1,0 +1,195 @@
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------
+   Палитра сайта (из макета Figma «Hero правильная»)
+   ------------------------------------------------------------------ */
+@theme static {
+  /* Фоны и поверхности */
+  --color-bg: #fff8f6; /* основной фон страницы */
+  --color-surface: #fff0ee; /* подложки: навигация, футер */
+  --color-blush-50: #ffe9e5; /* светлые круглые бейджи */
+  --color-blush-100: #ffe2dd; /* плашки, кнопка бургера */
+  --color-blush-200: #ffdad6; /* плашка у логотипа */
+  --color-blush-300: #fadcd7; /* кружок иконки в карточке */
+  --color-sage-light: #d7e8c7; /* светло-зелёный кружок иконки */
+  --color-white: #ffffff;
+  /* Акценты */
+  --color-rose: #f2a7a0; /* основной акцент: кнопки, активный пункт меню */
+  --color-rose-ink: #713a36; /* текст на розовом */
+  --color-wine: #894e49; /* логотип, имя, акцентный текст */
+  --color-peach: #fdcaa4; /* середина градиента рамки */
+  --color-cocoa: #7c5638; /* рукописные подписи, подсказки */
+  --color-sage: #aebfa0; /* листочки, конфетти */
+  --color-outline: #d7c2bf; /* разделители */
+  /* Текст */
+  --color-ink: #271815; /* заголовки */
+  --color-ink-muted: #524342; /* основной текст */
+  --color-ink-deep: #370d0b; /* мелкий текст на светлых плашках */
+}
+
+:root {
+  /* Тень (тёплая коричневая), используется как rgb(var(--shadow-rgb) / a) */
+  --shadow-rgb: 74 59 52;
+
+  --header-height: 64px;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --header-height: 80px;
+  }
+}
+
+@theme inline {
+  --font-sans: var(--font-manrope);
+  --font-serif: var(--font-playfair);
+
+  --shadow-soft: 0 4px 14px -2px rgb(var(--shadow-rgb) / 0.08);
+  --shadow-button: 0 6px 20px -2px rgb(var(--shadow-rgb) / 0.12);
+  --shadow-frame: 0 16px 38px -6px rgb(var(--shadow-rgb) / 0.12);
+  --shadow-header: 0 4px 20px -2px rgb(var(--shadow-rgb) / 0.06);
+
+  --animate-fade-up: fade-up 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-paw-bounce: paw-bounce 1.8s ease-in-out infinite;
+  --animate-float: float 7s ease-in-out infinite;
+  --animate-pug-tilt: pug-tilt 4s ease-in-out infinite;
+  --animate-flicker: flicker 0.9s ease-in-out infinite alternate;
+  --animate-glow: glow 1.8s ease-in-out infinite alternate;
+  --animate-smoke: smoke 1.8s ease-out both;
+  --animate-hop: hop 0.6s ease-out 2;
+  --animate-confetti: confetti var(--duration, 3s) cubic-bezier(0.25, 0.6, 0.4, 1) var(--delay, 0s) both;
+
+  @keyframes flicker {
+    0% {
+      transform: scale(1, 1) skewX(0deg);
+    }
+    33% {
+      transform: scale(0.94, 1.08) skewX(-3deg);
+    }
+    66% {
+      transform: scale(1.04, 0.95) skewX(2deg);
+    }
+    100% {
+      transform: scale(0.97, 1.12) skewX(-1deg);
+    }
+  }
+
+  @keyframes glow {
+    from {
+      opacity: 0.55;
+    }
+    to {
+      opacity: 0.9;
+    }
+  }
+
+  @keyframes smoke {
+    from {
+      opacity: 0.8;
+      transform: translateY(0) scale(0.8);
+    }
+    to {
+      opacity: 0;
+      transform: translateY(-26px) scale(1.3);
+    }
+  }
+
+  @keyframes hop {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    40% {
+      transform: translateY(-14px);
+    }
+  }
+
+  @keyframes confetti {
+    from {
+      opacity: 1;
+      transform: translate(0, -10vh) rotate(0deg);
+    }
+    85% {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+      transform: translate(var(--dx, 0px), 105vh) rotate(var(--rot, 360deg));
+    }
+  }
+
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes paw-bounce {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(6px);
+    }
+  }
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  @keyframes pug-tilt {
+    0%,
+    70%,
+    100% {
+      transform: rotate(0deg);
+    }
+    80% {
+      transform: rotate(-6deg);
+    }
+    90% {
+      transform: rotate(4deg);
+    }
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+  /* якорные ссылки не прячут заголовок секции под фиксированной шапкой */
+  scroll-padding-top: var(--header-height);
+}
+
+/* Пока открыт полноэкранный просмотр фото, страница под ним не прокручивается */
+html:has(dialog[open]) {
+  overflow: hidden;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-ink-muted);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
