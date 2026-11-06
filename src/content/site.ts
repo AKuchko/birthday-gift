@@ -29,8 +29,7 @@ export const header = {
 export const hero = {
   datePill: `${recipient.birthday} • особенный день`,
   musicLabel: "Мелодия",
-  // TODO: заменить на настоящую мелодию (положить файл в public/audio/)
-  musicSrc: "/audio/file_example_MP3_700KB.mp3",
+  musicSrc: "/audio/happy-birthday-music-box.mp3",
   overline: "С самыми теплыми мыслями от меня с Юлей",
   titleLine: "С днём рождения,",
   titleName: `${recipient.name}!`,

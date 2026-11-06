@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Icon } from "@/components/ui/Icon";
 import { asset } from "@/lib/asset";
 
@@ -10,17 +10,51 @@ type MusicButtonProps = {
   src: string;
 };
 
-/** Кнопка фоновой музыки: включает и ставит на паузу мелодию, играет по кругу. */
+const VOLUME = 0.6;
+
+/** События, которые браузер считает действием пользователя и после которых разрешает звук */
+const GESTURE_EVENTS = ["pointerdown", "keydown", "touchend"] as const;
+
+/**
+ * Кнопка фоновой музыки: мелодия играет по кругу и стартует сама при загрузке.
+ * Браузеры обычно блокируют звук до первого действия пользователя — в этом случае
+ * мелодия включится при первом касании, клике или нажатии клавиши в любом месте страницы.
+ */
 export function MusicButton({ label, src }: MusicButtonProps) {
   const audioRef = useRef<HTMLAudioElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
   const [playing, setPlaying] = useState(false);
+
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+    audio.volume = VOLUME;
+
+    const removeListeners = () => {
+      GESTURE_EVENTS.forEach((e) => document.removeEventListener(e, onGesture, true));
+    };
+
+    function onGesture(event: Event) {
+      removeListeners();
+      // Клик по самой кнопке обработает toggle — иначе он сразу поставит мелодию на паузу
+      if (buttonRef.current?.contains(event.target as Node)) return;
+      if (audio!.paused) audio!.play().catch(() => {});
+    }
+
+    audio.play().catch(() => {
+      // Автозапуск заблокирован — ждём первого действия пользователя
+      GESTURE_EVENTS.forEach((e) => document.addEventListener(e, onGesture, true));
+    });
+
+    return removeListeners;
+  }, []);
 
   const toggle = async () => {
     const audio = audioRef.current;
     if (!audio) return;
 
     if (audio.paused) {
-      audio.volume = 0.6;
+      audio.volume = VOLUME;
       try {
         await audio.play();
       } catch {
@@ -35,6 +69,7 @@ export function MusicButton({ label, src }: MusicButtonProps) {
   return (
     <>
       <button
+        ref={buttonRef}
         type="button"
         onClick={toggle}
         aria-pressed={playing}
@@ -59,7 +94,7 @@ export function MusicButton({ label, src }: MusicButtonProps) {
         ref={audioRef}
         src={asset(src)}
         loop
-        preload="none"
+        preload="auto"
         onPlay={() => setPlaying(true)}
         onPause={() => setPlaying(false)}
         onEnded={() => setPlaying(false)}
