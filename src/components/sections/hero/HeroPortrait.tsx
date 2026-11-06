@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Icon } from "@/components/ui/Icon";
+import { asset } from "@/lib/asset";
 
 type HeroPortraitProps = {
   src: string;
@@ -21,7 +22,7 @@ export function HeroPortrait({ src, alt, pugBubble }: HeroPortraitProps) {
           {/* Фото */}
           <div className="relative aspect-[3/4] w-full overflow-hidden rounded-t-[152px] rounded-b-[26px] bg-surface">
             <Image
-              src={src}
+              src={asset(src)}
               alt={alt}
               fill
               priority

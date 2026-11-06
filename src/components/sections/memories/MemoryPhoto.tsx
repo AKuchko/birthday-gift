@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { asset } from "@/lib/asset";
 
 type MemoryPhotoProps = {
   src: string | null;
@@ -23,7 +24,7 @@ export function MemoryPhoto({ src, alt, sizes, fit = "cover", priority }: Memory
 
   return (
     <Image
-      src={src}
+      src={asset(src)}
       alt={alt}
       fill
       sizes={sizes}

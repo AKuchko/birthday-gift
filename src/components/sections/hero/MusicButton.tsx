@@ -2,6 +2,7 @@
 
 import { useRef, useState } from "react";
 import { Icon } from "@/components/ui/Icon";
+import { asset } from "@/lib/asset";
 
 type MusicButtonProps = {
   label: string;
@@ -56,7 +57,7 @@ export function MusicButton({ label, src }: MusicButtonProps) {
       {/* Состояние кнопки берём из событий плеера — так оно всегда совпадает с реальным звуком */}
       <audio
         ref={audioRef}
-        src={src}
+        src={asset(src)}
         loop
         preload="none"
         onPlay={() => setPlaying(true)}

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { asset } from "@/lib/asset";
 
 type PolaroidProps = {
   /** Фото; если не задано — показывается розовая заглушка */
@@ -34,7 +35,7 @@ export function Polaroid({
       />
 
       <div className="relative aspect-[4/3] w-full overflow-hidden rounded-md bg-blush-100">
-        {src && <Image src={src} alt={alt} fill sizes={sizes} className="object-cover" />}
+        {src && <Image src={asset(src)} alt={alt} fill sizes={sizes} className="object-cover" />}
       </div>
 
       <figcaption className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1 px-2">

@@ -9,7 +9,7 @@ export const recipient = {
   nameGenitive: "Татьяны",
   latinName: "Tatyana",
   // TODO: заменить на настоящую дату дня рождения
-  birthday: "12 ноября",
+  birthday: "6 ноября",
 };
 
 export type SectionId = "hero" | "gratitude" | "memories" | "wishes";
@@ -31,16 +31,16 @@ export const hero = {
   musicLabel: "Мелодия",
   // TODO: заменить на настоящую мелодию (положить файл в public/audio/)
   musicSrc: "/audio/file_example_MP3_700KB.mp3",
-  overline: "Для самой тёплой и любимой",
+  overline: "С самыми теплыми мыслями от меня с Юлей",
   titleLine: "С днём рождения,",
   titleName: `${recipient.name}!`,
   portrait: {
-    src: "/images/hero/portrait.png",
+    src: "/images/hero/portrait.webp",
     alt: recipient.name,
   },
   pugBubble: "Гав! С праздником!",
   subtitle:
-    "Сегодня твой день — и этот маленький сайт создан, чтобы сказать тебе самые важные слова.",
+    "Сегодня Ваш день — и этот маленький сайт создан, чтобы сказать Вам важные слова.",
   cta: "Открыть поздравление",
   scrollHint: "Листай вниз",
 };
@@ -58,31 +58,29 @@ export const gratitude = {
       icon: "💖",
       tone: "blush",
       title: "Уют и нежность",
-      text: "За доброту и душевное тепло, которыми наполнен ваш дом.",
+      text: "За доброту и душевное тепло, которыми наполнен ваш дом. Я никогда не видел такой дружной семьи...",
     },
     {
       icon: "⭐",
       tone: "peach",
       title: "Пример для нас",
-      text: "За мудрость, чуткость и терпение, с которыми вы воспитали детей.",
+      text: "За мудрость, чуткость и терпение, с которыми вы воспитали детей. Юля - это результат ваших трудов. Спасибо за это!",
     },
     {
       icon: "🏡",
       tone: "sage",
       title: "Опора и поддержка",
-      text: "За то, что вы всегда рядом — и в мгновения радости, и в трудные минуты.",
+      text: "За то, что вы всегда рядом — и в мгновения радости, и в трудные минуты. Спасибо, что заботитесь и переживаете за Юлю!",
     },
     {
       icon: "🐾",
       tone: "rose",
       title: "Семья навсегда",
-      text: "За то, что приняли меня с открытым сердцем как родного человека.",
+      text: "За то, что приняли меня с открытым сердцем как родного человека. Я правда это очень ценю!",
     },
   ] satisfies { icon: string; tone: IconTone; title: string; text: string }[],
   polaroid: {
-    // TODO: положить фото в public/images/gratitude/ и указать путь, например
-    // "/images/gratitude/mom-and-kids.jpg". Пока null — показывается розовая заглушка.
-    src: null as string | null,
+    src: '/images/gratitude/with_kids.webp',
     alt: "Мама и дети",
     caption: "Мама и дети ❤️",
     badge: "Спасибо! ♡",
@@ -107,25 +105,35 @@ export const memories = {
   // TODO: заменить заглушки на настоящие фото
   items: [
     {
-      title: "Лето на даче",
-      text: "Родные сады, свежие ягоды и чай у самовара",
-      src: null,
+      title: "Первое знакомство",
+      text: "Уверен, всем было немного страшно знакомиться...",
+      src: '/images/memories/together.webp',
     },
     {
       title: "Новый год всей семьёй",
       text: "Самые крепкие объятия, тепло и мандарины",
-      src: "/images/memories/new-year.jpg",
+      src: "/images/memories/new_year.webp",
     },
     {
       title: "Тот самый день с мопсом",
       text: "Хвостик-бублик 🐾 море смеха и радости",
-      src: null,
+      src: '/images/memories/pug.webp',
       badge: "⭐ Звезда дня!",
     },
     {
-      title: "Самая лучезарная улыбка",
-      text: "Светлые глаза, вдохновение и нежность",
-      src: "/images/memories/smile.jpg",
+      title: "День, который изменил всю жизнь",
+      text: "Яркое платье, красота и новая жизнь, наполненная как счастьем, так и переживаниями",
+      src: "/images/memories/smile.webp",
+    },
+    {
+      title: "Прекрасный день на даче",
+      text: "Навсегда запомню ту заботу, которую Вы проявили в первые часы нашего знакомства",
+      src: "/images/memories/doch.webp",
+    },
+    {
+      title: "Еще немного Бо)",
+      text: "Лучший пёс, которого я знаю",
+      src: "/images/memories/pug_2.webp",
     },
   ] satisfies Memory[],
   footnote: "Впереди ещё сотни ярких моментов...",

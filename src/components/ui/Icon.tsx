@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { asset } from "@/lib/asset";
 
 type IconProps = {
   /** Путь к SVG в /public */
@@ -14,7 +15,7 @@ type IconProps = {
 export function Icon({ src, width, height, className, alt = "" }: IconProps) {
   return (
     <Image
-      src={src}
+      src={asset(src)}
       width={width}
       height={height}
       alt={alt}
